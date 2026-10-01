@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --color-picard-blue: #0a3c6e;
+  --color-picard-red: #e2231a;
+}
+
+body {
+  background-color: #f5f7fa;
+}
