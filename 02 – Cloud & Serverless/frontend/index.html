@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Incidents distributeurs Picard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Signalement d'incidents : Distributeurs Picard</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Signaler un incident</h2>
+      <form id="incident-form">
+        <div class="field">
+          <label for="distributeurId">Distributeur concerné</label>
+          <input type="text" id="distributeurId" placeholder="ex : DIST-PARIS-14" required />
+        </div>
+
+        <div class="field">
+          <label for="typeIncident">Type d'incident</label>
+          <select id="typeIncident" required>
+            <option value="panne">Panne</option>
+            <option value="temperature">Température anormale</option>
+            <option value="produit_bloque">Produit bloqué</option>
+            <option value="paiement">Problème de paiement</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="description">Description</label>
+          <textarea id="description" rows="3" required></textarea>
+        </div>
+
+        <div class="field">
+          <label for="dateSignalement">Date du signalement</label>
+          <input type="date" id="dateSignalement" required />
+        </div>
+
+        <button type="submit">Signaler l'incident</button>
+      </form>
+      <p id="form-message" class="message"></p>
+    </section>
+
+    <section class="card">
+      <div class="section-header">
+        <h2>Incidents signalés</h2>
+        <button id="refresh-btn" type="button">Actualiser</button>
+      </div>
+      <p id="list-message" class="message"></p>
+      <table id="incidents-table">
+        <thead>
+          <tr>
+            <th>Distributeur</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Date signalement</th>
+            <th>Statut</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="incidents-body"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

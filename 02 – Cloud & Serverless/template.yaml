@@ -1,0 +1,115 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Service de signalement des incidents sur les distributeurs automatiques Picard
+  (Lambda + API Gateway HTTP API + DynamoDB)
+
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    Timeout: 10
+    MemorySize: 128
+    Environment:
+      Variables:
+        TABLE_NAME: !Ref IncidentsTable
+
+Resources:
+
+  IncidentsApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins:
+          - "*"
+        AllowHeaders:
+          - "Content-Type"
+        AllowMethods:
+          - GET
+          - POST
+          - PATCH
+          - DELETE
+          - OPTIONS
+
+  IncidentsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: picard-incidents
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: incidentId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: incidentId
+          KeyType: HASH
+
+  ListIncidentsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: handlers/listIncidents.handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref IncidentsTable
+      Events:
+        ListIncidents:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IncidentsApi
+            Path: /incidents
+            Method: GET
+
+  CreateIncidentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: handlers/createIncident.handler
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: !Ref IncidentsTable
+      Events:
+        CreateIncident:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IncidentsApi
+            Path: /incidents
+            Method: POST
+
+  UpdateIncidentStatusFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: handlers/updateIncidentStatus.handler
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: !Ref IncidentsTable
+      Events:
+        UpdateIncidentStatus:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IncidentsApi
+            Path: /incidents/{id}
+            Method: PATCH
+
+  DeleteIncidentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: handlers/deleteIncident.handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref IncidentsTable
+      Events:
+        DeleteIncident:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IncidentsApi
+            Path: /incidents/{id}
+            Method: DELETE
+
+Outputs:
+  ApiUrl:
+    Description: URL de base de l'API 
+    Value: !Sub "https://${IncidentsApi}.execute-api.${AWS::Region}.amazonaws.com"
+  TableName:
+    Description: Nom de la table DynamoDB
+    Value: !Ref IncidentsTable

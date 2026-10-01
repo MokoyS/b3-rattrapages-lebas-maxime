@@ -1,0 +1,155 @@
+:root {
+  --blue: #0b3d91;
+  --blue-light: #eaf0fb;
+  --border: #d7dee8;
+  --text: #1c2733;
+  --danger: #c0392b;
+  --a-traiter: #c0392b;
+  --en-cours: #d68910;
+  --resolu: #1e8449;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f4f6fa;
+  color: var(--text);
+}
+
+header {
+  background: var(--blue);
+  color: white;
+  padding: 1.25rem 2rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+main {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.card h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+input,
+select,
+textarea {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: fit-content;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button.danger {
+  background: var(--danger);
+}
+
+.message {
+  min-height: 1.2rem;
+  font-size: 0.85rem;
+}
+
+.message.error {
+  color: var(--danger);
+}
+
+.message.success {
+  color: var(--resolu);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.75rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  vertical-align: top;
+}
+
+th {
+  color: #4a5568;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.badge.a_traiter { background: var(--a-traiter); }
+.badge.en_cours { background: var(--en-cours); }
+.badge.resolu { background: var(--resolu); }
