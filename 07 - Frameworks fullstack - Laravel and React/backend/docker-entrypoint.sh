@@ -2,7 +2,13 @@
 set -e
 
 echo "Waiting for the database to be ready..."
-until php bin/console dbal:run-sql "SELECT 1" > /dev/null 2>&1; do
+attempt=0
+until php bin/console dbal:run-sql "SELECT 1"; do
+  attempt=$((attempt + 1))
+  if [ "$attempt" -ge 15 ]; then
+    echo "Could not reach the database after 15 attempts, giving up."
+    exit 1
+  fi
   sleep 2
 done
 
