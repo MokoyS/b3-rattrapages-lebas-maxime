@@ -9,12 +9,11 @@ done
 echo "Running database migrations..."
 php bin/console doctrine:migrations:migrate --no-interaction
 
-if [ ! -f var/.fixtures_loaded ]; then
+if [ "$LOAD_FIXTURES" = "true" ]; then
   echo "Loading initial product catalog (fixtures)..."
   php bin/console doctrine:fixtures:load --no-interaction
-  mkdir -p var
-  touch var/.fixtures_loaded
 fi
 
-echo "Starting Symfony on 0.0.0.0:8000..."
-exec php -S 0.0.0.0:8000 -t public
+PORT="${PORT:-8000}"
+echo "Starting Symfony on 0.0.0.0:$PORT..."
+exec php -S "0.0.0.0:$PORT" -t public

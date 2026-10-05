@@ -1,0 +1,42 @@
+databases:
+  - name: picard-db
+    plan: free
+    databaseName: picard
+    user: picard
+
+services:
+  - type: web
+    name: picard-backend
+    runtime: docker
+    plan: free
+    rootDir: "07 – Frameworks fullstack - Laravel & React/backend"
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: prod
+      - key: APP_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: picard-db
+          property: connectionString
+      - key: CORS_ALLOW_ORIGIN
+        value: "^https://picard-frontend\\.onrender\\.com$"
+      - key: DEFAULT_URI
+        value: "https://picard-frontend.onrender.com"
+      - key: LOAD_FIXTURES
+        value: "true"
+
+  - type: web
+    name: picard-frontend
+    runtime: static
+    rootDir: "07 – Frameworks fullstack - Laravel & React/frontend"
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /api/*
+        destination: https://picard-backend.onrender.com/api/*
+      - type: rewrite
+        source: /*
+        destination: /index.html
