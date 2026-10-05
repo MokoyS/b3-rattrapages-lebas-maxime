@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Picard - Reconnaissance visuelle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="logo">picard</div>
+    <p class="tagline">Reconnaissance visuelle produit</p>
+  </header>
+
+  <main class="app-main">
+
+    <section id="source-selection" class="panel">
+      <h1>Analysez un produit</h1>
+      <p class="instructions">Importez une photo ou utilisez la caméra pour identifier un produit.</p>
+      <div class="source-buttons">
+        <button id="btn-upload" class="btn btn-primary">
+          <span class="btn-icon" aria-hidden="true"></span>
+          Importer une image
+        </button>
+        <button id="btn-webcam" class="btn btn-primary">
+          <span class="btn-icon" aria-hidden="true"></span>
+          Utiliser la caméra
+        </button>
+      </div>
+      <input type="file" id="file-input" accept="image/*" hidden>
+      <p id="model-status" class="model-status">Chargement du modèle d'analyse…</p>
+    </section>
+
+    <section id="capture-area" class="panel hidden">
+      <div class="media-stage">
+        <video id="webcam-video" autoplay playsinline hidden></video>
+        <img id="preview-image" alt="Aperçu de l'image sélectionnée" hidden>
+        <canvas id="capture-canvas" hidden></canvas>
+      </div>
+      <div class="capture-actions">
+        <button id="btn-capture" class="btn btn-secondary hidden">Capturer la photo</button>
+        <button id="btn-analyze" class="btn btn-primary hidden">Lancer l'analyse</button>
+        <button id="btn-cancel" class="btn btn-ghost">Annuler</button>
+      </div>
+    </section>
+
+    <section id="loading-area" class="panel hidden">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Analyse de l'image en cours…</p>
+    </section>
+
+    <section id="results-area" class="panel hidden">
+      <h1>Résultats de l'analyse</h1>
+      <div class="results-content">
+        <div class="result-media">
+          <img id="result-image" alt="Image analysée">
+        </div>
+        <div class="results-panel">
+          <ul id="results-list" class="results-list"></ul>
+          <p id="low-confidence-msg" class="low-confidence hidden">
+            Résultat incertain. Essayez avec une image plus nette, mieux cadrée ou mieux éclairée.
+          </p>
+        </div>
+      </div>
+      <button id="btn-reset" class="btn btn-primary">Nouvelle analyse</button>
+    </section>
+
+  </main>
+
+  <script src="https://unpkg.com/ml5@1/dist/ml5.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
