@@ -9,7 +9,7 @@ services:
     name: picard-backend
     runtime: docker
     plan: free
-    rootDir: "07 – Frameworks fullstack - Laravel & React/backend"
+    rootDir: "07 - Frameworks fullstack - Laravel and React/backend"
     dockerfilePath: Dockerfile
     envVars:
       - key: APP_ENV
@@ -30,7 +30,7 @@ services:
   - type: web
     name: picard-frontend
     runtime: static
-    rootDir: "07 – Frameworks fullstack - Laravel & React/frontend"
+    rootDir: "07 - Frameworks fullstack - Laravel and React/frontend"
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
     routes:
