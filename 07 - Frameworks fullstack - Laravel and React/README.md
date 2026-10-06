@@ -11,5 +11,7 @@ Prérequis : Docker Desktop
 docker compose up --build
 ```
 
-## Lien Loom technique
+## Lien Loom 
+
+https://www.loom.com/share/bfca6ec8ef63494a97ca3f1a0ddb2e05
 
