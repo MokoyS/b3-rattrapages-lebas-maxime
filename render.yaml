@@ -36,7 +36,7 @@ services:
     routes:
       - type: rewrite
         source: /api/*
-        destination: https://picard-backend.onrender.com/api/*
+        destination: https://picard-backend-2gy8.onrender.com/api/*
       - type: rewrite
         source: /*
         destination: /index.html
