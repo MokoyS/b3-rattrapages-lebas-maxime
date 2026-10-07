@@ -1,0 +1,8 @@
+api_platform:
+    title: API Distributeurs Picard
+    description: API permettant aux distributeurs réfrigérés Picard de proposer les produits, gérer le panier et les notations.
+    version: 1.0.0
+    defaults:
+        stateless: true
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']
