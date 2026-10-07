@@ -18,12 +18,8 @@ Lors du `sam deploy --guided`, répondre :
 - **Allow SAM CLI IAM role creation** : `Y`
 - **Save arguments to samconfig.toml** : `Y`
 
-À la fin du déploiement, la sortie affiche une valeur **`ApiUrl`**, par exemple :
-```
-https://xxxxxxxxxx.execute-api.eu-west-3.amazonaws.com
-```
-
-Copier cette URL dans `frontend/app.js`, variable `API_BASE_URL` (en haut du fichier).
+À la fin du déploiement, la sortie affiche une valeur **`ApiUrl`**
+Copier cette URL dans `frontend/app.js`, variable `API_BASE_URL` 
 
 # Lancer l'interface
 
